@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>Contact us</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="center">
+        <form method="POST" action="{% url 'transfer' %}">
+            {% csrf_token %}
+            <div class="txt_field">
+                <input type="text" name="sender_name" required>
+                <span></span>
+                <label>Sender Name</label>
+            </div>
+            
+            <div class="txt_field">
+                <input type="text" name="receiver_name" required>
+                <span></span>
+                <label>Receiver Name</label>
+            </div>
+            
+            <div class="txt_field">
+                <input type="text" name="account_number" required>
+                <span></span>
+                <label>Receiver Account Number</label>
+            </div>
+            
+            <div class="txt_field">
+                <input type="number" name="number" required>
+                <span></span>
+                <label>Amount</label>
+            </div>
+            <button type="submit" value="submit">Send</button>
+        </form>
+    </div>
+  </body>
+</html>
+
+
+ 
+
