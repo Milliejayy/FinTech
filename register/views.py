@@ -10,7 +10,6 @@ from django.contrib.auth.hashers import make_password, check_password
 from . forms import FormData, SignInData
 from . models import UserForm, SignIn, Transfer
 from django.core.exceptions import ValidationError
-import uuid
 
 # Create your views here.
 def index(request):
@@ -45,7 +44,7 @@ def signup(request):
              # Save user data
             user= UserForm.objects.create(firstname=firstname, lastname=lastname, username=username, phonenumber=phonenumber, email=email, password=password) 
     
-            user.instance.password = make_password(password)
+            user.password = make_password(password)
             user.save()
             messages.success(request, 'Registration successful!')
             return render(request, 'register/index.html')      
