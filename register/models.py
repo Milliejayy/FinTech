@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.hashers import make_password
 from django.db.models.signals import post_save
 import uuid
-from . utils import random_account_number
+from . utils import random_account_number #This imports our function module
 
 # Create your models here.
 #=================== Create an Account =====================
@@ -22,13 +22,21 @@ class UserForm(models.Model):
     password = models.CharField(max_length=15, default="password")
 
     phonenumber = models.CharField(max_length=15, unique=True, default="phonenumber")
-    
+        
+        
 
 #================ Account ============      
 class Account(models.Model):
     user = models.OneToOneField(UserForm, on_delete=models.CASCADE)
-    account_number = models.CharField(max_length=255, null=True, unique=True, editable=False, default=random_account_number) # Unique account number
+    account_number = models.CharField(max_length=255, null=True, unique=True, editable=False) # Unique account number
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+
+ 
+    def save(self, *args, **kwargs):
+        if not self.account_number:
+            self.account_number = random_account_number()
+            super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f'{self.user}'

@@ -6,4 +6,4 @@ class MemberUF(admin.ModelAdmin):
     list_display= ("firstname", "email", "password")
 
 admin.site.register(UserForm, MemberUF),
-admin.site.register(Transfer, )
+admin.site.register(Transfer)
